@@ -11,4 +11,8 @@ class dompet extends Model
     protected $fillable = [
         'nama','referensi','deskripsi','status_id'
     ];
+
+    public function transaksi(){
+        return $this->hasMany('App\transaksi','id', 'dompet_id');
+    }
 }
