@@ -44,7 +44,7 @@
                                 <th>Actions</th>
                               </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="dataTab">
                             @foreach($data_dompet ?? '' ?? '' as $key => $row)
                                 <tr>
                                     <td>{{ ++$key}}</td>
@@ -95,8 +95,33 @@
                 }
             })
             .done(function(response){
-                console.log(response)
-                $('#dataTable').DataTable().ajax.reload();
+                var appendString = "";
+                for(var i = 0; i < response.length; i++){
+                    let status;
+                    let actionTag;
+                    let detailTag;
+                    let editTag;
+                    if(response[i].status_id == 1){
+                        status = "Aktif"
+                        actionTag = '<a href="{{url('/dompets/changeStatus/'.$row->id.'/'.$row->status_id)}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Change To Tidak Aktif"><i class="fa fa-times"></i> Tidak Aktif</a>';
+                        detailTag = '<a href="{{url('/dompets/show/'.$row->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fa fa-eye"></i> Detail</a>';
+                        editTag = '<a href="{{url('/dompets/edit/'.$row->id)}}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pen"></i> Edit</a>';
+                    }else{
+                        status = "Tidak Aktif"
+                        actionTag = '<a href="{{url('/dompets/changeStatus/'.$row->id.'/'.$row->status_id)}}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Change To Aktif"><i class="fa fa-check"></i> Aktif</a>';
+                        detailTag = '<a href="{{url('/dompets/show/'.$row->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fa fa-eye"></i> Detail</a>';
+                        editTag = '<a href="{{url('/dompets/edit/'.$row->id)}}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pen"></i> Edit</a>';
+                    }
+
+                    appendString += "<tr>" +
+                        "<td>" + i + "</td>" + 
+                        "<td>" + response[i].nama + "</td>" +
+                        "<td>" + response[i].referensi + "</td>" +
+                        "<td>" + response[i].deskripsi + "</td>" +
+                        "<td>" + status + "</td>"+
+                        "<td>" + detailTag+" "+editTag+" "+actionTag+ "</td>";
+                }
+                $('#dataTab').empty().append(appendString);
             })
             .fail(function(){
                 console.log('Something Went Wrong .... Please contact administrator');
