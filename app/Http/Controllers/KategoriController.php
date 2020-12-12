@@ -128,9 +128,9 @@ class KategoriController extends Controller
      */
     public function filterStatus($status_id){
       if($status_id == 0){
-        $data_kategori = kategori::all()->toArray();
+        $data_kategori = kategori::all();
       }else{
-        $data_kategori = kategori::where('status_id',$status_id)->get()->toArray();
+        $data_kategori = kategori::where('status_id',$status_id)->get();
       }
       return response()->json($data_kategori);
   }
