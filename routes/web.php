@@ -25,6 +25,7 @@ Route::get('/', function () {
     Route::get('/dompets/show/{id}','DompetController@show');
     Route::post('/dompets/store','DompetController@store');
     Route::post('/dompets/update','DompetController@update');
+    Route::post('/dompets/filterStatus/{status_id}','DompetController@filterStatus');
 //End Route Dompet
 
 //Start Route Kategori
@@ -34,7 +35,8 @@ Route::get('/', function () {
     Route::get('/kategoris/changeStatus/{id}/{status_id}','KategoriController@changeStatus');
     Route::get('/kategoris/show/{id}','KategoriController@show');
     Route::post('/kategoris/store','KategoriController@store');
-Route::post('/kategoris/update','KategoriController@update');
+    Route::post('/kategoris/update','KategoriController@update');
+    Route::post('/kategoris/filterStatus/{status_id}','KategoriController@filterStatus');
 //End Route Kategori
 
 //Start Route Dompet Masuk
@@ -51,5 +53,5 @@ Route::post('/kategoris/update','KategoriController@update');
 
 //Start Route Laporan Transaksi
     Route::get('/transaksis/indexLaporan', 'TransaksiController@indexLaporan');
-    Route::get('/transaksis/filterLaporan','TransaksiController@filterLaporan');
+    Route::post('/transaksis/filterLaporan','TransaksiController@filterLaporan');
 //End Route Laporan Transaksi
