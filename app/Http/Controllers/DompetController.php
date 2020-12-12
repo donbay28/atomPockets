@@ -16,7 +16,6 @@ class DompetController extends Controller
     public function index()
     {
         $data_dompet = dompet::all();
-
         return view('Dompet.index', compact('data_dompet'));
     }
 
@@ -133,9 +132,9 @@ class DompetController extends Controller
      */
     public function filterStatus($status_id){
       if($status_id == 0){
-        $data_dompet = dompet::all()->toArray();
+        $data_dompet = dompet::all();
       }else{
-        $data_dompet = dompet::where('status_id',$status_id)->get()->toArray();
+        $data_dompet = dompet::where('status_id',$status_id)->get();
       }
       return response()->json($data_dompet);
   }
