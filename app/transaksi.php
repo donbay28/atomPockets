@@ -9,7 +9,7 @@ class transaksi extends Model
     protected $primaryKey = 'id';
     protected $hidden = ['pivot','updated_at','created_at'];
     protected $fillable = [
-        'code','tanggal','nilai','dompet_id','kategori_id','status_id'
+        'code','tanggal','nilai','dompet_id','kategori_id','status_id','deskripsi'
     ];
 
     public function dompet(){
