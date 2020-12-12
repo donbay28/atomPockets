@@ -17,6 +17,7 @@ class CreateTransaksisTable extends Migration
           $table->id();
           $table->string('code',40);
           $table->date('tanggal');
+          $table->string('deskripsi');
           $table->integer('nilai');
           $table->integer('dompet_id')->unsigned()->index();
           $table->integer('kategori_id')->unsigned()->index();
